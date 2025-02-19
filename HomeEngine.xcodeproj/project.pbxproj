@@ -10,6 +10,7 @@
 		64E560672D662BBD00FE3849 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E560662D662BBD00FE3849 /* Foundation.framework */; };
 		64E560692D662BC700FE3849 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E560682D662BC700FE3849 /* Metal.framework */; };
 		64E5606B2D662BCC00FE3849 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E5606A2D662BCC00FE3849 /* QuartzCore.framework */; };
+		64E5607B2D66332900FE3849 /* libglfw.3.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E560782D66330A00FE3849 /* libglfw.3.4.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +30,15 @@
 		64E560662D662BBD00FE3849 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		64E560682D662BC700FE3849 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		64E5606A2D662BCC00FE3849 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		64E5606E2D66330A00FE3849 /* glfw3Config.cmake */ = {isa = PBXFileReference; lastKnownFileType = text; path = glfw3Config.cmake; sourceTree = "<group>"; };
+		64E5606F2D66330A00FE3849 /* glfw3ConfigVersion.cmake */ = {isa = PBXFileReference; lastKnownFileType = text; path = glfw3ConfigVersion.cmake; sourceTree = "<group>"; };
+		64E560702D66330A00FE3849 /* glfw3Targets.cmake */ = {isa = PBXFileReference; lastKnownFileType = text; path = glfw3Targets.cmake; sourceTree = "<group>"; };
+		64E560712D66330A00FE3849 /* glfw3Targets-release.cmake */ = {isa = PBXFileReference; lastKnownFileType = text; path = "glfw3Targets-release.cmake"; sourceTree = "<group>"; };
+		64E560742D66330A00FE3849 /* glfw3.pc */ = {isa = PBXFileReference; lastKnownFileType = text; path = glfw3.pc; sourceTree = "<group>"; };
+		64E560762D66330A00FE3849 /* libglfw.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libglfw.dylib; sourceTree = "<group>"; };
+		64E560772D66330A00FE3849 /* libglfw.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libglfw.3.dylib; sourceTree = "<group>"; };
+		64E560782D66330A00FE3849 /* libglfw.3.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libglfw.3.4.dylib; sourceTree = "<group>"; };
+		64E560792D66330A00FE3849 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libglfw3.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -49,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64E5607B2D66332900FE3849 /* libglfw.3.4.dylib in Frameworks */,
 				64E560672D662BBD00FE3849 /* Foundation.framework in Frameworks */,
 				64E560692D662BC700FE3849 /* Metal.framework in Frameworks */,
 				64E5606B2D662BCC00FE3849 /* QuartzCore.framework in Frameworks */,
@@ -79,11 +90,53 @@
 		64E560652D662BBC00FE3849 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				64E5607A2D66330A00FE3849 /* lib */,
 				64E5606A2D662BCC00FE3849 /* QuartzCore.framework */,
 				64E560682D662BC700FE3849 /* Metal.framework */,
 				64E560662D662BBD00FE3849 /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		64E560722D66330A00FE3849 /* glfw3 */ = {
+			isa = PBXGroup;
+			children = (
+				64E5606E2D66330A00FE3849 /* glfw3Config.cmake */,
+				64E5606F2D66330A00FE3849 /* glfw3ConfigVersion.cmake */,
+				64E560702D66330A00FE3849 /* glfw3Targets.cmake */,
+				64E560712D66330A00FE3849 /* glfw3Targets-release.cmake */,
+			);
+			path = glfw3;
+			sourceTree = "<group>";
+		};
+		64E560732D66330A00FE3849 /* cmake */ = {
+			isa = PBXGroup;
+			children = (
+				64E560722D66330A00FE3849 /* glfw3 */,
+			);
+			path = cmake;
+			sourceTree = "<group>";
+		};
+		64E560752D66330A00FE3849 /* pkgconfig */ = {
+			isa = PBXGroup;
+			children = (
+				64E560742D66330A00FE3849 /* glfw3.pc */,
+			);
+			path = pkgconfig;
+			sourceTree = "<group>";
+		};
+		64E5607A2D66330A00FE3849 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				64E560732D66330A00FE3849 /* cmake */,
+				64E560752D66330A00FE3849 /* pkgconfig */,
+				64E560762D66330A00FE3849 /* libglfw.dylib */,
+				64E560772D66330A00FE3849 /* libglfw.3.dylib */,
+				64E560782D66330A00FE3849 /* libglfw.3.4.dylib */,
+				64E560792D66330A00FE3849 /* libglfw3.a */,
+			);
+			name = lib;
+			path = ../../../../../opt/homebrew/Cellar/glfw/3.4/lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,7 +328,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/metal-cpp";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/metal-cpp",
+					/opt/homebrew/Cellar/glfw/3.4/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/Cellar/glfw/3.4/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -284,7 +344,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/metal-cpp";
+				HEADER_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/metal-cpp",
+					/opt/homebrew/Cellar/glfw/3.4/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/Cellar/glfw/3.4/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
