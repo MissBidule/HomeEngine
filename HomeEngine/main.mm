@@ -5,13 +5,14 @@
 //  Created by MissBidule on 19/02/2025.
 //
 #include <Metal/Metal.hpp>
+#include "mtl_engine.hpp"
 
-#include <iostream>
-
-int main(int argc, const char * argv[]) {
+int main() {
     
-    MTL::Device* device = MTL::CreateSystemDefaultDevice();
+    MTLEngine engine;
+    engine.init();
+    engine.run();
+    engine.cleanup();
     
-    std::cout << "Hello, World!\n";
     return 0;
 }
