@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		64E560672D662BBD00FE3849 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E560662D662BBD00FE3849 /* Foundation.framework */; };
+		64E560692D662BC700FE3849 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E560682D662BC700FE3849 /* Metal.framework */; };
+		64E5606B2D662BCC00FE3849 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E5606A2D662BCC00FE3849 /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		64E55F892D66243F00FE3849 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -20,12 +26,20 @@
 
 /* Begin PBXFileReference section */
 		64E55F8B2D66243F00FE3849 /* HomeEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HomeEngine; sourceTree = BUILT_PRODUCTS_DIR; };
+		64E560662D662BBD00FE3849 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		64E560682D662BC700FE3849 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		64E5606A2D662BCC00FE3849 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		64E55F8D2D66243F00FE3849 /* HomeEngine */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = HomeEngine;
+			sourceTree = "<group>";
+		};
+		64E560642D662AC800FE3849 /* metal-cpp */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "metal-cpp";
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -35,6 +49,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64E560672D662BBD00FE3849 /* Foundation.framework in Frameworks */,
+				64E560692D662BC700FE3849 /* Metal.framework in Frameworks */,
+				64E5606B2D662BCC00FE3849 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,7 +61,9 @@
 		64E55F822D66243F00FE3849 = {
 			isa = PBXGroup;
 			children = (
+				64E560642D662AC800FE3849 /* metal-cpp */,
 				64E55F8D2D66243F00FE3849 /* HomeEngine */,
+				64E560652D662BBC00FE3849 /* Frameworks */,
 				64E55F8C2D66243F00FE3849 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -55,6 +74,16 @@
 				64E55F8B2D66243F00FE3849 /* HomeEngine */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		64E560652D662BBC00FE3849 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				64E5606A2D662BCC00FE3849 /* QuartzCore.framework */,
+				64E560682D662BC700FE3849 /* Metal.framework */,
+				64E560662D662BBD00FE3849 /* Foundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +103,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				64E55F8D2D66243F00FE3849 /* HomeEngine */,
+				64E560642D662AC800FE3849 /* metal-cpp */,
 			);
 			name = HomeEngine;
 			packageProductDependencies = (
@@ -245,6 +275,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/metal-cpp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -253,6 +284,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/metal-cpp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
