@@ -42,6 +42,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		641B27CF2D669851005B6648 /* imgui */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = imgui;
+			sourceTree = "<group>";
+		};
 		64E55F8D2D66243F00FE3849 /* HomeEngine */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = HomeEngine;
@@ -72,6 +77,7 @@
 		64E55F822D66243F00FE3849 = {
 			isa = PBXGroup;
 			children = (
+				641B27CF2D669851005B6648 /* imgui */,
 				64E560642D662AC800FE3849 /* metal-cpp */,
 				64E55F8D2D66243F00FE3849 /* HomeEngine */,
 				64E560652D662BBC00FE3849 /* Frameworks */,
@@ -155,6 +161,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				641B27CF2D669851005B6648 /* imgui */,
 				64E55F8D2D66243F00FE3849 /* HomeEngine */,
 				64E560642D662AC800FE3849 /* metal-cpp */,
 			);
@@ -331,10 +338,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/metal-cpp",
 					/opt/homebrew/Cellar/glfw/3.4/include,
+					"$(PROJECT_DIR)/imgui",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/homebrew/Cellar/glfw/3.4/lib,
+					"$(PROJECT_DIR)/imgui/examples/libs/glfw/lib-vc2010-32",
+					"$(PROJECT_DIR)/imgui/examples/libs/glfw/lib-vc2010-64",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -347,10 +357,13 @@
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/metal-cpp",
 					/opt/homebrew/Cellar/glfw/3.4/include,
+					"$(PROJECT_DIR)/imgui",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/homebrew/Cellar/glfw/3.4/lib,
+					"$(PROJECT_DIR)/imgui/examples/libs/glfw/lib-vc2010-32",
+					"$(PROJECT_DIR)/imgui/examples/libs/glfw/lib-vc2010-64",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
