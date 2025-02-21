@@ -11,7 +11,7 @@ void MTLEngine::init() {
     initDevice();
     initWindow();
     
-    createTriangle();
+    createSquare();
     createDefaultLibrary();
     createCommandQueue();
     createRenderPipeline();
@@ -36,6 +36,15 @@ void MTLEngine::initDevice() {
     metalDevice = MTL::CreateSystemDefaultDevice();
 }
 
+void MTLEngine::frameBufferSizeCallback(GLFWwindow *window, int width, int height) {
+    MTLEngine* engine = (MTLEngine*)glfwGetWindowUserPointer(window);
+    engine->resizeFrameBuffer(width, height);
+}
+
+void MTLEngine::resizeFrameBuffer(int width, int height) {
+    metalLayer.drawableSize = CGSizeMake(width, height);
+}
+
 void MTLEngine::initWindow() {
     glfwInit();
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -47,6 +56,8 @@ void MTLEngine::initWindow() {
     
     int width, height;
     glfwGetFramebufferSize(glfwWindow, &width, &height);
+    glfwSetWindowUserPointer(glfwWindow, this);
+    glfwSetFramebufferSizeCallback(glfwWindow, frameBufferSizeCallback);
     
     metalWindow = glfwGetCocoaWindow(glfwWindow);
     metalLayer = [CAMetalLayer layer];
@@ -57,14 +68,19 @@ void MTLEngine::initWindow() {
     metalWindow.contentView.wantsLayer = YES;
 }
 
-void MTLEngine::createTriangle() {
-    simd::float3 triangleVertices[] = {
-        {-0.5f, -0.5f, 0.0f},
-        { 0.5f, -0.5f, 0.0f},
-        { 0.0f,  0.5f, 0.0f}
+void MTLEngine::createSquare() {
+    VertexData squareVertices[] = {
+        {{-0.5f, -0.5f, 0.5f, 1.0f}, {0.0f, 0.0f}},
+        {{-0.5f,  0.5f, 0.5f, 1.0f}, {0.0f, 1.0f}},
+        {{ 0.5f,  0.5f, 0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{-0.5f, -0.5f, 0.5f, 1.0f}, {0.0f, 0.0f}},
+        {{ 0.5f,  0.5f, 0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{ 0.5f, -0.5f, 0.5f, 1.0f}, {1.0f, 0.0f}}
     };
     
-    triangleVertexBuffer = metalDevice->newBuffer(&triangleVertices, sizeof(triangleVertices), MTL::ResourceStorageModeShared);
+    squareVertexBuffer = metalDevice->newBuffer(&squareVertices, sizeof(squareVertices), MTL::ResourceStorageModeShared);
+    
+    lavaTexture = new Texture("assets/pretty.png", metalDevice);
 }
 
 void MTLEngine::createDefaultLibrary() {
@@ -126,9 +142,10 @@ void MTLEngine::sendRenderCommand() {
 
 void MTLEngine::encodeRenderCommand(MTL::RenderCommandEncoder* renderCommandEncoder) {
     renderCommandEncoder->setRenderPipelineState(metalRenderPSO);
-    renderCommandEncoder->setVertexBuffer(triangleVertexBuffer, 0, 0);
+    renderCommandEncoder->setVertexBuffer(squareVertexBuffer, 0, 0);
     MTL::PrimitiveType typeTriangle = MTL::PrimitiveTypeTriangle;
     NS::UInteger vertexStart = 0;
-    NS::UInteger vertexCount = 3;
+    NS::UInteger vertexCount = 6;
+    renderCommandEncoder->setFragmentTexture(lavaTexture->texture, 0);
     renderCommandEncoder->drawPrimitives(typeTriangle, vertexStart, vertexCount);
 }

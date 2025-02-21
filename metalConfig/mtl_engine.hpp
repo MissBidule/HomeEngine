@@ -17,10 +17,18 @@
 #include <QuartzCore/CAMetalLayer.h>
 #include <QuartzCore/QuartzCore.hpp>
 
+#include "VertexData.hpp"
+#include "Texture.hpp"
+#include <stb_image.h>
+
 #include <simd/simd.h>
+#include <filesystem>
 
 class MTLEngine {
 public:
+    static void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
+    void resizeFrameBuffer(int width, int height);
+    
     void init();
     void run();
     void cleanup();
@@ -29,7 +37,7 @@ private:
     void initDevice();
     void initWindow();
     
-    void createTriangle();
+    void createSquare();
     void createDefaultLibrary();
     void createCommandQueue();
     void createRenderPipeline();
@@ -48,5 +56,7 @@ private:
     MTL::CommandQueue* metalCommandQueue;
     MTL::CommandBuffer* metalCommandBuffer;
     MTL::RenderPipelineState* metalRenderPSO;
-    MTL::Buffer* triangleVertexBuffer;
+    MTL::Buffer* squareVertexBuffer;
+    
+    Texture* lavaTexture;
 };

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		641695232D68CC8B0067B2CE /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6416947A2D68B9D80067B2CE /* main.mm */; };
 		64E560672D662BBD00FE3849 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E560662D662BBD00FE3849 /* Foundation.framework */; };
 		64E560692D662BC700FE3849 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E560682D662BC700FE3849 /* Metal.framework */; };
 		64E5606B2D662BCC00FE3849 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E5606A2D662BCC00FE3849 /* QuartzCore.framework */; };
@@ -26,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6416947A2D68B9D80067B2CE /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		64E55F8B2D66243F00FE3849 /* HomeEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HomeEngine; sourceTree = BUILT_PRODUCTS_DIR; };
 		64E560662D662BBD00FE3849 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		64E560682D662BC700FE3849 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
@@ -42,19 +44,29 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		641B27CF2D669851005B6648 /* imgui */ = {
+		641694912D68CA8A0067B2CE /* commonSrc */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = imgui;
+			path = commonSrc;
 			sourceTree = "<group>";
 		};
-		64E55F8D2D66243F00FE3849 /* HomeEngine */ = {
+		641694942D68CA8D0067B2CE /* assets */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = HomeEngine;
+			path = assets;
 			sourceTree = "<group>";
 		};
-		64E560642D662AC800FE3849 /* metal-cpp */ = {
+		641694982D68CA9D0067B2CE /* metalConfig */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "metal-cpp";
+			path = metalConfig;
+			sourceTree = "<group>";
+		};
+		6416949C2D68CAA20067B2CE /* shaders */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = shaders;
+			sourceTree = "<group>";
+		};
+		6416949E2D68CAB50067B2CE /* lib */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -77,9 +89,12 @@
 		64E55F822D66243F00FE3849 = {
 			isa = PBXGroup;
 			children = (
-				641B27CF2D669851005B6648 /* imgui */,
-				64E560642D662AC800FE3849 /* metal-cpp */,
-				64E55F8D2D66243F00FE3849 /* HomeEngine */,
+				6416949E2D68CAB50067B2CE /* lib */,
+				6416949C2D68CAA20067B2CE /* shaders */,
+				641694982D68CA9D0067B2CE /* metalConfig */,
+				641694912D68CA8A0067B2CE /* commonSrc */,
+				641694942D68CA8D0067B2CE /* assets */,
+				6416947A2D68B9D80067B2CE /* main.mm */,
 				64E560652D662BBC00FE3849 /* Frameworks */,
 				64E55F8C2D66243F00FE3849 /* Products */,
 			);
@@ -161,9 +176,11 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				641B27CF2D669851005B6648 /* imgui */,
-				64E55F8D2D66243F00FE3849 /* HomeEngine */,
-				64E560642D662AC800FE3849 /* metal-cpp */,
+				641694912D68CA8A0067B2CE /* commonSrc */,
+				641694942D68CA8D0067B2CE /* assets */,
+				641694982D68CA9D0067B2CE /* metalConfig */,
+				6416949C2D68CAA20067B2CE /* shaders */,
+				6416949E2D68CAB50067B2CE /* lib */,
 			);
 			name = HomeEngine;
 			packageProductDependencies = (
@@ -210,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				641695232D68CC8B0067B2CE /* main.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,16 +354,17 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/metal-cpp",
+					"$(PROJECT_DIR)/lib/metal-cpp",
 					/opt/homebrew/Cellar/glfw/3.4/include,
-					"$(PROJECT_DIR)/imgui",
+					"$(PROJECT_DIR)/commonSrc",
+					"$(PROJECT_DIR)/lib/imgui",
+					"$(PROJECT_DIR)/lib/stb",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/homebrew/Cellar/glfw/3.4/lib,
-					"$(PROJECT_DIR)/imgui/examples/libs/glfw/lib-vc2010-32",
-					"$(PROJECT_DIR)/imgui/examples/libs/glfw/lib-vc2010-64",
 				);
+				MTL_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/commonSrc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -355,16 +374,17 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/metal-cpp",
+					"$(PROJECT_DIR)/lib/metal-cpp",
 					/opt/homebrew/Cellar/glfw/3.4/include,
-					"$(PROJECT_DIR)/imgui",
+					"$(PROJECT_DIR)/commonSrc",
+					"$(PROJECT_DIR)/lib/imgui",
+					"$(PROJECT_DIR)/lib/stb",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/opt/homebrew/Cellar/glfw/3.4/lib,
-					"$(PROJECT_DIR)/imgui/examples/libs/glfw/lib-vc2010-32",
-					"$(PROJECT_DIR)/imgui/examples/libs/glfw/lib-vc2010-64",
 				);
+				MTL_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/commonSrc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
