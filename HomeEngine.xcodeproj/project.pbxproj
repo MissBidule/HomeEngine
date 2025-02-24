@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		641695232D68CC8B0067B2CE /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6416947A2D68B9D80067B2CE /* main.mm */; };
+		641695232D68CC8B0067B2CE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6416947A2D68B9D80067B2CE /* main.cpp */; };
 		64E560672D662BBD00FE3849 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E560662D662BBD00FE3849 /* Foundation.framework */; };
 		64E560692D662BC700FE3849 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E560682D662BC700FE3849 /* Metal.framework */; };
 		64E5606B2D662BCC00FE3849 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64E5606A2D662BCC00FE3849 /* QuartzCore.framework */; };
@@ -17,8 +17,8 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		64E55F892D66243F00FE3849 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1;
 			dstSubfolderSpec = 0;
 			files = (
 			);
@@ -27,7 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		6416947A2D68B9D80067B2CE /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
+		6416947A2D68B9D80067B2CE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		64E55F8B2D66243F00FE3849 /* HomeEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HomeEngine; sourceTree = BUILT_PRODUCTS_DIR; };
 		64E560662D662BBD00FE3849 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		64E560682D662BC700FE3849 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
@@ -94,7 +94,7 @@
 				641694982D68CA9D0067B2CE /* metalConfig */,
 				641694912D68CA8A0067B2CE /* commonSrc */,
 				641694942D68CA8D0067B2CE /* assets */,
-				6416947A2D68B9D80067B2CE /* main.mm */,
+				6416947A2D68B9D80067B2CE /* main.cpp */,
 				64E560652D662BBC00FE3849 /* Frameworks */,
 				64E55F8C2D66243F00FE3849 /* Products */,
 			);
@@ -227,7 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				641695232D68CC8B0067B2CE /* main.mm in Sources */,
+				641695232D68CC8B0067B2CE /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

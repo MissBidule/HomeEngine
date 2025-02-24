@@ -1,0 +1,48 @@
+{
+  "buildCommand" : {
+    "command" : "prepareForIndexing",
+    "enableIndexBuildArena" : true,
+    "targets" : null
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "f3ee5d3894b83a093316fd8e922d65afa8909af51df7d51ab02acdd8daa16b72"
+    }
+  ],
+  "containerPath" : "/Users/liloualidor/Macbook only/HomeEngine/HomeEngine/HomeEngine.xcodeproj",
+  "continueBuildingAfterErrors" : true,
+  "dependencyScope" : "workspace",
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "indexbuild",
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/liloualidor/Macbook only/HomeEngine/HomeEngine/DerivedData/HomeEngine/Index.noindex/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/liloualidor/Macbook only/HomeEngine/HomeEngine/DerivedData/HomeEngine/Index.noindex/Build/Products",
+      "derivedDataPath" : "/Users/liloualidor/Macbook only/HomeEngine/HomeEngine/DerivedData",
+      "indexDataStoreFolderPath" : "/Users/liloualidor/Macbook only/HomeEngine/HomeEngine/DerivedData/HomeEngine/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/liloualidor/Macbook only/HomeEngine/HomeEngine/DerivedData/HomeEngine/Index.noindex/PrecompiledHeaders",
+      "indexRegularBuildIntermediatesPath" : "/Users/liloualidor/Macbook only/HomeEngine/HomeEngine/DerivedData/HomeEngine/Build/Intermediates.noindex",
+      "indexRegularBuildProductsPath" : "/Users/liloualidor/Macbook only/HomeEngine/HomeEngine/DerivedData/HomeEngine/Build/Products",
+      "pchPath" : "/Users/liloualidor/Macbook only/HomeEngine/HomeEngine/DerivedData/HomeEngine/Index.noindex/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "synthesized" : {
+        "table" : {
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_XOJIT_PREVIEWS" : "NO",
+          "ONLY_ACTIVE_ARCH" : "YES"
+        }
+      }
+    }
+  },
+  "qos" : "utility",
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

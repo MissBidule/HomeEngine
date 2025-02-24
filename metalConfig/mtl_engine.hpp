@@ -8,13 +8,9 @@
 
 #define GLFW_INCLUDE_NONE
 #import <GLFW/glfw3.h>
-#define GLFW_EXPOSE_NATIVE_COCOA
-#import <GLFW/glfw3native.h>
 
 #include <Metal/Metal.hpp>
-#include <Metal/Metal.h>
 #include <QuartzCore/CAMetalLayer.hpp>
-#include <QuartzCore/CAMetalLayer.h>
 #include <QuartzCore/QuartzCore.hpp>
 
 #include "VertexData.hpp"
@@ -48,9 +44,10 @@ private:
     
     MTL::Device* metalDevice;
     GLFWwindow* glfwWindow;
-    NSWindow* metalWindow;
-    CAMetalLayer* metalLayer;
+    CA::MetalLayer* metalLayer;
     CA::MetalDrawable* metalDrawable;
+    
+    NS::AutoreleasePool* pPool;
     
     MTL::Library* metalDefaultLibrary;
     MTL::CommandQueue* metalCommandQueue;
