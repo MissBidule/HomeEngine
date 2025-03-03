@@ -12,7 +12,7 @@ void MTLEngine::init() {
     initDevice();
     initWindow();
     
-    createSquare();
+    createCube();
     createDefaultLibrary();
     createCommandQueue();
     createRenderPipeline();
@@ -68,17 +68,60 @@ void MTLEngine::initWindow() {
     GLFWBridge::AddLayerToWindow(glfwWindow, metalLayer);
 }
 
-void MTLEngine::createSquare() {
-    VertexData squareVertices[] = {
-        {{-0.5f, -0.5f, 0.5f, 1.0f}, {0.0f, 0.0f}},
-        {{-0.5f,  0.5f, 0.5f, 1.0f}, {0.0f, 1.0f}},
-        {{ 0.5f,  0.5f, 0.5f, 1.0f}, {1.0f, 1.0f}},
-        {{-0.5f, -0.5f, 0.5f, 1.0f}, {0.0f, 0.0f}},
-        {{ 0.5f,  0.5f, 0.5f, 1.0f}, {1.0f, 1.0f}},
-        {{ 0.5f, -0.5f, 0.5f, 1.0f}, {1.0f, 0.0f}}
+void MTLEngine::createCube() {
+    VertexData cubeVertices[] = {
+        //Front face
+        {{-0.5f,-0.5f, 0.5f, 1.0f}, {0.0f, 0.0f}},
+        {{ 0.5f,-0.5f, 0.5f, 1.0f}, {1.0f, 0.0f}},
+        {{ 0.5f, 0.5f, 0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{ 0.5f, 0.5f, 0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{-0.5f, 0.5f, 0.5f, 1.0f}, {0.0f, 1.0f}},
+        {{-0.5f,-0.5f, 0.5f, 1.0f}, {0.0f, 0.0f}},
+        
+        //Back face
+        {{ 0.5f,-0.5f,-0.5f, 1.0f}, {0.0f, 0.0f}},
+        {{-0.5f,-0.5f,-0.5f, 1.0f}, {1.0f, 0.0f}},
+        {{-0.5f, 0.5f,-0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{-0.5f, 0.5f,-0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{ 0.5f, 0.5f,-0.5f, 1.0f}, {0.0f, 1.0f}},
+        {{ 0.5f,-0.5f,-0.5f, 1.0f}, {0.0f, 0.0f}},
+        
+        //Top face
+        {{-0.5f, 0.5f, 0.5f, 1.0f}, {0.0f, 0.0f}},
+        {{ 0.5f, 0.5f, 0.5f, 1.0f}, {1.0f, 0.0f}},
+        {{ 0.5f, 0.5f,-0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{ 0.5f, 0.5f,-0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{-0.5f, 0.5f,-0.5f, 1.0f}, {0.0f, 1.0f}},
+        {{-0.5f, 0.5f, 0.5f, 1.0f}, {0.0f, 0.0f}},
+        
+        //Bottom face
+        {{-0.5f,-0.5f,-0.5f, 1.0f}, {0.0f, 0.0f}},
+        {{ 0.5f,-0.5f,-0.5f, 1.0f}, {1.0f, 0.0f}},
+        {{ 0.5f,-0.5f, 0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{ 0.5f,-0.5f, 0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{-0.5f,-0.5f, 0.5f, 1.0f}, {0.0f, 1.0f}},
+        {{-0.5f,-0.5f,-0.5f, 1.0f}, {0.0f, 0.0f}},
+        
+        //Left face
+        {{-0.5f,-0.5f,-0.5f, 1.0f}, {0.0f, 0.0f}},
+        {{-0.5f,-0.5f, 0.5f, 1.0f}, {1.0f, 0.0f}},
+        {{-0.5f, 0.5f, 0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{-0.5f, 0.5f, 0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{-0.5f, 0.5f,-0.5f, 1.0f}, {0.0f, 1.0f}},
+        {{-0.5f,-0.5f,-0.5f, 1.0f}, {0.0f, 0.0f}},
+        
+        //Right face
+        {{ 0.5f,-0.5f, 0.5f, 1.0f}, {0.0f, 0.0f}},
+        {{ 0.5f,-0.5f,-0.5f, 1.0f}, {1.0f, 0.0f}},
+        {{ 0.5f, 0.5f,-0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{ 0.5f, 0.5f,-0.5f, 1.0f}, {1.0f, 1.0f}},
+        {{ 0.5f, 0.5f, 0.5f, 1.0f}, {0.0f, 1.0f}},
+        {{ 0.5f,-0.5f, 0.5f, 1.0f}, {0.0f, 0.0f}}
     };
     
-    squareVertexBuffer = metalDevice->newBuffer(&squareVertices, sizeof(squareVertices), MTL::ResourceStorageModeShared);
+    cubeVertexBuffer = metalDevice->newBuffer(&cubeVertices, sizeof(cubeVertices), MTL::ResourceStorageModeShared);
+    
+    transformationBuffer = metalDevice->newBuffer(sizeof(TransformationData), MTL::ResourceStorageModeShared);
     
     lavaTexture = new Texture("assets/pretty.png", metalDevice);
 }
@@ -141,11 +184,42 @@ void MTLEngine::sendRenderCommand() {
 }
 
 void MTLEngine::encodeRenderCommand(MTL::RenderCommandEncoder* renderCommandEncoder) {
+    //Moves the cube 2 units down the negative Z-axis
+    matrix_float4x4 translationMatrix = matrix4x4_translation(0.0, 0.0, -1.0);
+    
+    //Moves the cube over time
+    float angleInDegrees = glfwGetTime()/2.0 * 45;
+    float angleInRadians = angleInDegrees * M_PI / 180.0f;
+    matrix_float4x4 rotationMatrix = matrix4x4_rotation(angleInRadians, 0.0, 1.0, 0.0);
+    
+    matrix_float4x4 modelMatrix = simd_mul(translationMatrix, rotationMatrix);
+    
+    simd::float3 R = simd::float3 {1, 0, 0}; //Right to camera
+    simd::float3 U = simd::float3 {0, 1, 0}; //Up to camera
+    simd::float3 F = simd::float3 {0, 0,-1}; //Forward to camera
+    simd::float3 P = simd::float3 {0, 0, 1}; //Position of camera
+    
+    matrix_float4x4 viewMatrix = matrix_make_rows( R.x, R.y, R.z, simd::dot(-R, P),
+                                                   U.x, U.y, U.z, simd::dot(-U, P),
+                                                  -F.x,-F.y,-F.z, simd::dot( F, P),
+                                                  0.0, 0.0, 0.0, 1);
+    
+    float fov = 90 * (M_PI / 180.0f);
+    float aspectRatio = (metalLayer->drawableSize().width / metalLayer->drawableSize().height);
+    float nearZ = 0.1f;
+    float farZ = 100.0f;
+    
+    matrix_float4x4 perspectiveMatrix = matrix_perspective_right_hand(fov, aspectRatio, nearZ, farZ);
+    
+    TransformationData transformationData = {modelMatrix, viewMatrix, perspectiveMatrix};
+    memcpy(transformationBuffer->contents(), &transformationData, sizeof(transformationData));
+    
     renderCommandEncoder->setRenderPipelineState(metalRenderPSO);
-    renderCommandEncoder->setVertexBuffer(squareVertexBuffer, 0, 0);
+    renderCommandEncoder->setVertexBuffer(cubeVertexBuffer, 0, 0);
+    renderCommandEncoder->setVertexBuffer(transformationBuffer, 0, 1);
     MTL::PrimitiveType typeTriangle = MTL::PrimitiveTypeTriangle;
     NS::UInteger vertexStart = 0;
-    NS::UInteger vertexCount = 6;
+    NS::UInteger vertexCount = 36;
     renderCommandEncoder->setFragmentTexture(lavaTexture->texture, 0);
     renderCommandEncoder->drawPrimitives(typeTriangle, vertexStart, vertexCount);
 }

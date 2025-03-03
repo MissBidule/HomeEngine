@@ -20,6 +20,8 @@
 #include <simd/simd.h>
 #include <filesystem>
 
+#include "AAPLMathUtilities.h"
+
 class MTLEngine {
 public:
     static void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
@@ -33,7 +35,7 @@ private:
     void initDevice();
     void initWindow();
     
-    void createSquare();
+    void createCube();
     void createDefaultLibrary();
     void createCommandQueue();
     void createRenderPipeline();
@@ -53,7 +55,8 @@ private:
     MTL::CommandQueue* metalCommandQueue;
     MTL::CommandBuffer* metalCommandBuffer;
     MTL::RenderPipelineState* metalRenderPSO;
-    MTL::Buffer* squareVertexBuffer;
+    MTL::Buffer* cubeVertexBuffer;
+    MTL::Buffer* transformationBuffer;
     
     Texture* lavaTexture;
 };

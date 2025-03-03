@@ -359,6 +359,7 @@
 					"$(PROJECT_DIR)/commonSrc",
 					"$(PROJECT_DIR)/lib/imgui",
 					"$(PROJECT_DIR)/lib/stb",
+					"$(PROJECT_DIR)/lib/AAPLMathUtilities",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -379,6 +380,7 @@
 					"$(PROJECT_DIR)/commonSrc",
 					"$(PROJECT_DIR)/lib/imgui",
 					"$(PROJECT_DIR)/lib/stb",
+					"$(PROJECT_DIR)/lib/AAPLMathUtilities",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
