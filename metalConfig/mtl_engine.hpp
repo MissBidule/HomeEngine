@@ -36,9 +36,15 @@ private:
     void initWindow();
     
     void createCube();
+    void createBuffers();
     void createDefaultLibrary();
     void createCommandQueue();
     void createRenderPipeline();
+    void createDepthAndMSAATextures();
+    void createRenderPassDescriptor();
+    
+    //Upon resizing, update Depth and MSAA Textures
+    void updateRenderPassDescriptor();
     
     void encodeRenderCommand(MTL::RenderCommandEncoder* renderEncoder);
     void sendRenderCommand();
@@ -57,6 +63,12 @@ private:
     MTL::RenderPipelineState* metalRenderPSO;
     MTL::Buffer* cubeVertexBuffer;
     MTL::Buffer* transformationBuffer;
+    MTL::DepthStencilState* depthStencilState;
+    MTL::RenderPassDescriptor* renderPassDescriptor;
+    MTL::Texture* msaaRenderTargetTexture = nullptr;
+    MTL::Texture* depthTexture;
+    
+    const int sampleCount = 4;
     
     Texture* lavaTexture;
 };
