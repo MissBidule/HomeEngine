@@ -24,9 +24,6 @@
 
 class MTLEngine {
 public:
-    static void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
-    void resizeFrameBuffer(int width, int height);
-    
     void init();
     void run();
     void cleanup();
@@ -49,6 +46,9 @@ private:
     void encodeRenderCommand(MTL::RenderCommandEncoder* renderEncoder);
     void sendRenderCommand();
     void draw();
+    
+    static void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
+    void resizeFrameBuffer(int width, int height);
     
     MTL::Device* metalDevice;
     GLFWwindow* glfwWindow;

@@ -293,6 +293,9 @@ void MTLEngine::encodeRenderCommand(MTL::RenderCommandEncoder* renderCommandEnco
     TransformationData transformationData = {modelMatrix, viewMatrix, perspectiveMatrix};
     memcpy(transformationBuffer->contents(), &transformationData, sizeof(transformationData));
     
+    renderCommandEncoder->setFrontFacingWinding(MTL::WindingCounterClockwise);
+    renderCommandEncoder->setCullMode(MTL::CullModeBack);
+    renderCommandEncoder->setTriangleFillMode(MTL::TriangleFillModeFill);
     renderCommandEncoder->setRenderPipelineState(metalRenderPSO);
     renderCommandEncoder->setDepthStencilState(depthStencilState);
     renderCommandEncoder->setVertexBuffer(cubeVertexBuffer, 0, 0);
