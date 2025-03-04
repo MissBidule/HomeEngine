@@ -43,9 +43,22 @@
 		64E560792D66330A00FE3849 /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libglfw3.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		6454B49D2D7738FF005BE910 /* Exceptions for "commonSrc" folder in "Compile Sources" phase from "HomeEngine" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 64E55F872D66243F00FE3849 /* Sources */;
+			membershipExceptions = (
+				BasicShapes/Cube.hpp,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		641694912D68CA8A0067B2CE /* commonSrc */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6454B49D2D7738FF005BE910 /* Exceptions for "commonSrc" folder in "Compile Sources" phase from "HomeEngine" target */,
+			);
 			path = commonSrc;
 			sourceTree = "<group>";
 		};
@@ -200,6 +213,7 @@
 				TargetAttributes = {
 					64E55F8A2D66243F00FE3849 = {
 						CreatedOnToolsVersion = 16.2;
+						LastSwiftMigration = 1620;
 					};
 				};
 			};
@@ -352,6 +366,7 @@
 		64E55F932D66243F00FE3849 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/lib/metal-cpp",
@@ -367,12 +382,15 @@
 				);
 				MTL_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/commonSrc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
 		64E55F942D66243F00FE3849 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				HEADER_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/lib/metal-cpp",
@@ -388,6 +406,7 @@
 				);
 				MTL_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/commonSrc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};

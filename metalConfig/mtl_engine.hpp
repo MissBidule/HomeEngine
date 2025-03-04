@@ -26,14 +26,14 @@ class MTLEngine {
 public:
     void init();
     void run();
-    void cleanup();
+    void cleanup();//TODO
     
 private:
     void initDevice();
     void initWindow();
     
-    void createCube();
-    void createBuffers();
+    void createCube(); //TODO
+    void createBuffers(); //TODO
     void createDefaultLibrary();
     void createCommandQueue();
     void createRenderPipeline();
@@ -43,12 +43,14 @@ private:
     //Upon resizing, update Depth and MSAA Textures
     void updateRenderPassDescriptor();
     
-    void encodeRenderCommand(MTL::RenderCommandEncoder* renderEncoder);
+    void encodeRenderCommand(MTL::RenderCommandEncoder* renderEncoder); //TODO
     void sendRenderCommand();
     void draw();
     
     static void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
     void resizeFrameBuffer(int width, int height);
+    
+    //float getAspectRatio();
     
     MTL::Device* metalDevice;
     GLFWwindow* glfwWindow;
@@ -60,9 +62,10 @@ private:
     MTL::Library* metalDefaultLibrary;
     MTL::CommandQueue* metalCommandQueue;
     MTL::CommandBuffer* metalCommandBuffer;
-    MTL::RenderPipelineState* metalRenderPSO;
-    MTL::Buffer* cubeVertexBuffer;
-    MTL::Buffer* transformationBuffer;
+    MTL::RenderPipelineState* metalRenderPSO; //TODO
+    MTL::Buffer* cubeVertexBuffer;//TODO
+    MTL::Buffer* transformationBuffer;//TODO
+    MTL::Buffer* transformationBuffer2; //TODO
     MTL::DepthStencilState* depthStencilState;
     MTL::RenderPassDescriptor* renderPassDescriptor;
     MTL::Texture* msaaRenderTargetTexture = nullptr;
@@ -70,5 +73,5 @@ private:
     
     const int sampleCount = 4;
     
-    Texture* lavaTexture;
+    Texture* lavaTexture;//TODO
 };

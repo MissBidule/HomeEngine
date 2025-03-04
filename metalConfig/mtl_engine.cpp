@@ -34,6 +34,7 @@ void MTLEngine::run() {
 void MTLEngine::cleanup() {
     glfwTerminate();
     transformationBuffer->release();
+    transformationBuffer2->release();
     msaaRenderTargetTexture->release();
     depthTexture->release();
     renderPassDescriptor->release();
@@ -148,6 +149,7 @@ void MTLEngine::createCube() {
 
 void MTLEngine::createBuffers() {
     transformationBuffer = metalDevice->newBuffer(sizeof(TransformationData), MTL::ResourceStorageModeShared);
+    transformationBuffer2 = metalDevice->newBuffer(sizeof(TransformationData), MTL::ResourceStorageModeShared);
 }
 
 void MTLEngine::createDefaultLibrary() {
@@ -296,13 +298,27 @@ void MTLEngine::encodeRenderCommand(MTL::RenderCommandEncoder* renderCommandEnco
     renderCommandEncoder->setFrontFacingWinding(MTL::WindingCounterClockwise);
     renderCommandEncoder->setCullMode(MTL::CullModeBack);
     renderCommandEncoder->setTriangleFillMode(MTL::TriangleFillModeFill);
-    renderCommandEncoder->setRenderPipelineState(metalRenderPSO);
     renderCommandEncoder->setDepthStencilState(depthStencilState);
+    //here which shader
+    renderCommandEncoder->setRenderPipelineState(metalRenderPSO);
+    //vertex pos
     renderCommandEncoder->setVertexBuffer(cubeVertexBuffer, 0, 0);
+    //vertex transform
     renderCommandEncoder->setVertexBuffer(transformationBuffer, 0, 1);
+    //how to draw
     MTL::PrimitiveType typeTriangle = MTL::PrimitiveTypeTriangle;
     NS::UInteger vertexStart = 0;
     NS::UInteger vertexCount = 36;
+    //frag texture if needed
     renderCommandEncoder->setFragmentTexture(lavaTexture->texture, 0);
+    //drawing step
     renderCommandEncoder->drawPrimitives(typeTriangle, vertexStart, vertexCount);
+    //example2
+    matrix_float4x4 translationMatrix2 = matrix4x4_translation(1.0, 0.0, -1.0);
+    matrix_float4x4 modelMatrix2 = simd_mul(translationMatrix2, rotationMatrix);
+    transformationData.modelMatrix = modelMatrix2;
+    memcpy(transformationBuffer2->contents(), &transformationData, sizeof(transformationData));
+    renderCommandEncoder->setVertexBuffer(transformationBuffer2, 0, 1);
+    renderCommandEncoder->drawPrimitives(typeTriangle, vertexStart, vertexCount);
+    
 }
