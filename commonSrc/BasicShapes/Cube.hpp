@@ -4,13 +4,19 @@
 //
 //  Created by MissBidule on 04/03/2025.
 //
+#pragma once
+
 #include "Element.hpp"
 
-//class Cube : public Element
-//Cube(ShaderParam)->vertex and UV +
-//->draw(MTL::RenderCommandEncoder*, Camera, depthStencilState) +
-//height -
-//width -
-//depth -
-//GetDimensions()
-//SetDimensions(simd::float3)
+class Cube : public Element {
+public:
+    Cube(ShaderParam shaderParam, MTL::Device* metalDevice);
+    void setDimensions(simd::float3 newDimensions);
+    simd::float3 getDimensions();
+    
+private:
+    void createVertexUV(MTL::Device* metalDevice) override;
+    float height = 1.0f;
+    float width = 1.0f;
+    float depth = 1.0f;
+};

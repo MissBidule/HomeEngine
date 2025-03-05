@@ -67,6 +67,10 @@ void MTLEngine::resizeFrameBuffer(int width, int height) {
     updateRenderPassDescriptor();
 }
 
+float MTLEngine::getAspectRatio() {
+    return (metalLayer->drawableSize().width / metalLayer->drawableSize().height);
+}
+
 void MTLEngine::initWindow() {
     glfwInit();
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -171,7 +175,6 @@ void MTLEngine::createRenderPipeline() {
     assert(fragmentShader);
     
     MTL::RenderPipelineDescriptor* renderPipelineDecriptor = MTL::RenderPipelineDescriptor::alloc()->init();
-    renderPipelineDecriptor->setLabel(NS::String::string("Triangle Rendering Pipeline", NS::ASCIIStringEncoding));
     renderPipelineDecriptor->setVertexFunction(vertexShader);
     renderPipelineDecriptor->setFragmentFunction(fragmentShader);
     assert(renderPipelineDecriptor);
@@ -187,12 +190,12 @@ void MTLEngine::createRenderPipeline() {
         std::cerr << "Error creating render pipeline state: " << error << std::endl;
         std::exit(0);
     }
-    
+    //-//
     MTL::DepthStencilDescriptor* depthStencilDescriptor = MTL::DepthStencilDescriptor::alloc()->init();
     depthStencilDescriptor->setDepthCompareFunction(MTL::CompareFunctionLessEqual);
     depthStencilDescriptor->setDepthWriteEnabled(true);
     depthStencilState = metalDevice->newDepthStencilState(depthStencilDescriptor);
-    
+    //-//
     renderPipelineDecriptor->release();
     vertexShader->release();
     fragmentShader->release();
@@ -286,7 +289,7 @@ void MTLEngine::encodeRenderCommand(MTL::RenderCommandEncoder* renderCommandEnco
                                                   0.0, 0.0, 0.0, 1);
     
     float fov = 90 * (M_PI / 180.0f);
-    float aspectRatio = (metalLayer->drawableSize().width / metalLayer->drawableSize().height);
+    float aspectRatio = getAspectRatio();
     float nearZ = 0.1f;
     float farZ = 100.0f;
     
@@ -297,8 +300,9 @@ void MTLEngine::encodeRenderCommand(MTL::RenderCommandEncoder* renderCommandEnco
     
     renderCommandEncoder->setFrontFacingWinding(MTL::WindingCounterClockwise);
     renderCommandEncoder->setCullMode(MTL::CullModeBack);
-    renderCommandEncoder->setTriangleFillMode(MTL::TriangleFillModeFill);
     renderCommandEncoder->setDepthStencilState(depthStencilState);
+    
+    renderCommandEncoder->setTriangleFillMode(MTL::TriangleFillModeFill);
     //here which shader
     renderCommandEncoder->setRenderPipelineState(metalRenderPSO);
     //vertex pos

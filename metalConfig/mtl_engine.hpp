@@ -50,7 +50,7 @@ private:
     static void frameBufferSizeCallback(GLFWwindow *window, int width, int height);
     void resizeFrameBuffer(int width, int height);
     
-    //float getAspectRatio();
+    float getAspectRatio();
     
     MTL::Device* metalDevice;
     GLFWwindow* glfwWindow;
@@ -74,4 +74,8 @@ private:
     const int sampleCount = 4;
     
     Texture* lavaTexture;//TODO
+    
+    //flat color shader
+    //texture shader
+    //light shader
 };

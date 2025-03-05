@@ -4,19 +4,29 @@
 //
 //  Created by MissBidule on 04/03/2025.
 //
-//Enum Orthogonal = matrix_ortho_right_hand / perspective matrix_perspective_right_hand -
+#pragma once
 
-//Class Camera
-//ChangeView() +
-//movement with mouse (right clic / left clic / scroll) +
-//movement with function -> imgui +
-//simd::float3 cameraPosition -
-//simd::float3 right vector -
-//simd::float3 up vector -
-//simd::float3 forward vector -
-//fov -
-//nearz -
-//farz -
-//getViewMatrix() +
-//getPerspectiveMatrix(aspectRatio) +
+#include "AAPLMathUtilities.h"
 
+enum class View {
+    Perspective = 0,
+    Orthogonal = 1
+};
+
+class Camera {
+public:
+    void ChangeView();
+    matrix_float4x4 getViewMatrix();
+    matrix_float4x4 getPerspectiveMatrix(float width, float height);
+    //movement with mouse (right clic / left clic / scroll) +
+    //movement with function -> imgui +
+private:
+    simd::float3 cameraPosition = simd::float3 {0, 0, 1};
+    simd::float3 rightVector    = simd::float3 {1, 0, 0};
+    simd::float3 upVector       = simd::float3 {0, 1, 0};
+    simd::float3 forwardVector  = simd::float3 {0, 0,-1};
+    float fov   = 90 * (M_PI / 180.0f);
+    float nearZ = 0.1f;
+    float farZ  = 100.0f;
+    View viewType = View::Perspective; //Orthogonal matrix_ortho_right_hand / perspective matrix_perspective_right_hand -
+};
