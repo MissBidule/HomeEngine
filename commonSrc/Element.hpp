@@ -18,10 +18,11 @@ class Element {
 public:
     static std::list<Element*> elementList;
     
-    Element(ShaderParam& shader);
+    Element(ShaderParam* shader);
+    virtual ~Element() {};
     void cleanup();
     
-    void draw(MTL::RenderCommandEncoder* renderCommandEncoder, Camera camera, float screenWidth, float screenHeight);
+    void draw(MTL::RenderCommandEncoder* renderCommandEncoder, Camera* camera, float aspectRatio);
     void applytexture(const char* texturePath = "", MTL::Device* metalDevice = nullptr);
     void changeShader(ShaderParam& newShader);
     

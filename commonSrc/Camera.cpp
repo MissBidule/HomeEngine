@@ -10,6 +10,14 @@ void Camera::ChangeView() {
     viewType = (View)(((int)viewType + 1) % 2);
 }
 
+void Camera::setPosition(simd::float3 newPosition) {
+    cameraPosition = newPosition;
+}
+
+simd::float3 Camera::getPosition() {
+    return cameraPosition;
+}
+
 matrix_float4x4 Camera::getViewMatrix() {
     simd::float3& R = rightVector;
     simd::float3& U = upVector;
@@ -22,14 +30,14 @@ matrix_float4x4 Camera::getViewMatrix() {
                             0.0, 0.0, 0.0, 1);
 }
 
-matrix_float4x4 Camera::getPerspectiveMatrix(float width, float height) {
+matrix_float4x4 Camera::getPerspectiveMatrix(float aspectRatio) {
     switch (viewType) {
         case View::Perspective:
-            return matrix_perspective_right_hand(fov, width/height, nearZ, farZ);
+            return matrix_perspective_right_hand(fov, aspectRatio, nearZ, farZ);
             break;
             
         case View::Orthogonal:
-            return matrix_ortho_right_hand(-width/2.0f, width/2.0f, -height/2.0f, height/2.0f, nearZ, farZ);
+            return matrix_ortho_right_hand(-2 * (aspectRatio), 2 * (aspectRatio), -2, 2, nearZ, farZ);
             break;
             
         default:

@@ -8,7 +8,7 @@
 
 std::list<Element*> Element::elementList = std::list<Element*>();
 
-Element::Element(ShaderParam& shaderParam) : shader(&shaderParam){
+Element::Element(ShaderParam* shaderParam) : shader(shaderParam){
     elementList.emplace_back(this);
 }
 
@@ -22,8 +22,8 @@ void Element::createBuffers(MTL::Device* metalDevice) {
     transformationBuffer = metalDevice->newBuffer(sizeof(TransformationData), MTL::ResourceStorageModeShared);
 }
 
-void Element::draw(MTL::RenderCommandEncoder* renderCommandEncoder, Camera camera, float screenWidth, float screenHeight) {
-    TransformationData transformationData = {getModelMatrix(), camera.getViewMatrix(), camera.getPerspectiveMatrix(screenWidth, screenHeight)};
+void Element::draw(MTL::RenderCommandEncoder* renderCommandEncoder, Camera* camera, float aspectRatio) {
+    TransformationData transformationData = {getModelMatrix(), camera->getViewMatrix(), camera->getPerspectiveMatrix(aspectRatio)};
     memcpy(transformationBuffer->contents(), &transformationData, sizeof(transformationData));
     
     renderCommandEncoder->setTriangleFillMode(fillMode);

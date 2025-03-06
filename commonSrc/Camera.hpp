@@ -16,8 +16,10 @@ enum class View {
 class Camera {
 public:
     void ChangeView();
+    void setPosition(simd::float3 newPosition);
+    simd::float3 getPosition();
     matrix_float4x4 getViewMatrix();
-    matrix_float4x4 getPerspectiveMatrix(float width, float height);
+    matrix_float4x4 getPerspectiveMatrix(float aspectRatio);
     //movement with mouse (right clic / left clic / scroll) +
     //movement with function -> imgui +
 private:
@@ -28,5 +30,5 @@ private:
     float fov   = 90 * (M_PI / 180.0f);
     float nearZ = 0.1f;
     float farZ  = 100.0f;
-    View viewType = View::Perspective; //Orthogonal matrix_ortho_right_hand / perspective matrix_perspective_right_hand -
+    View viewType = View::Perspective; 
 };

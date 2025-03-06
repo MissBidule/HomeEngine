@@ -1,3 +1,4 @@
+#pragma once
 /*
 See LICENSE folder for this sampleâ€™s licensing information.
 

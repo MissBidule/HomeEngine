@@ -15,6 +15,8 @@
 
 #include "VertexData.hpp"
 #include "Texture.hpp"
+#include "ShaderParam.hpp"
+#include "Camera.hpp"
 #include <stb_image.h>
 
 #include <simd/simd.h>
@@ -32,8 +34,7 @@ private:
     void initDevice();
     void initWindow();
     
-    void createCube(); //TODO
-    void createBuffers(); //TODO
+    void createBasicShaders();
     void createDefaultLibrary();
     void createCommandQueue();
     void createRenderPipeline();
@@ -43,7 +44,7 @@ private:
     //Upon resizing, update Depth and MSAA Textures
     void updateRenderPassDescriptor();
     
-    void encodeRenderCommand(MTL::RenderCommandEncoder* renderEncoder); //TODO
+    void encodeRenderCommand(MTL::RenderCommandEncoder* renderEncoder);
     void sendRenderCommand();
     void draw();
     
@@ -59,13 +60,11 @@ private:
     
     NS::AutoreleasePool* pPool;
     
+    Camera* sceneCamera;
     MTL::Library* metalDefaultLibrary;
     MTL::CommandQueue* metalCommandQueue;
     MTL::CommandBuffer* metalCommandBuffer;
-    MTL::RenderPipelineState* metalRenderPSO; //TODO
-    MTL::Buffer* cubeVertexBuffer;//TODO
-    MTL::Buffer* transformationBuffer;//TODO
-    MTL::Buffer* transformationBuffer2; //TODO
+    MTL::RenderPipelineState* metalRenderPSO;
     MTL::DepthStencilState* depthStencilState;
     MTL::RenderPassDescriptor* renderPassDescriptor;
     MTL::Texture* msaaRenderTargetTexture = nullptr;
@@ -73,9 +72,7 @@ private:
     
     const int sampleCount = 4;
     
-    Texture* lavaTexture;//TODO
-    
     //flat color shader
-    //texture shader
+    ShaderParam* textureShader;
     //light shader
 };

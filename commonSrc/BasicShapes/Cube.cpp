@@ -6,7 +6,7 @@
 //
 #include "Cube.hpp"
 
-Cube::Cube(ShaderParam shaderParam, MTL::Device* metalDevice) : Element(shaderParam) {
+Cube::Cube(ShaderParam* shaderParam, MTL::Device* metalDevice) : Element(shaderParam) {
     createVertexUV(metalDevice);
     createBuffers(metalDevice);
 }
