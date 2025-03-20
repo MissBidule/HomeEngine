@@ -42,7 +42,7 @@ void UI::draw(MTLEngine* mtlEngine, MTL::RenderCommandEncoder* renderCommandEnco
     if (show_demo_window)
         ImGui::ShowDemoWindow(&show_demo_window);
     
-    {
+    {//elements
         ImGui::Begin("Add element :", NULL, ImGuiWindowFlags_AlwaysAutoResize);
         
         if (ImGui::Button("Cube")) {
@@ -52,15 +52,22 @@ void UI::draw(MTLEngine* mtlEngine, MTL::RenderCommandEncoder* renderCommandEnco
         
         ImGui::NewLine();
         
-        for (Element* element : Element::elementList) {
+        for (std::list<Element*>::iterator it = Element::elementList.begin(); it != Element::elementList.end(); ++it)
+        {
             //change position
-            ImGui::DragFloat3(("position of " + element->getName()).c_str(), (float*)&element->position, 0.1f);
+            ImGui::DragFloat3(("position of " + (*it)->getName()).c_str(), (float*)&(*it)->position, 0.1f);
             
             //change dimension
-            ImGui::DragFloat3(("scale of " + element->getName()).c_str(), (float*)&element->scale, 0.1f, 0.0f, std::numeric_limits<float>::max());
+            ImGui::DragFloat3(("scale of " + (*it)->getName()).c_str(), (float*)&(*it)->scale, 0.1f, 0.0f, FLT_MAX);
             
-            //change rotation
-            ImGui::DragFloat3(("rotation of " + element->getName()).c_str(), (float*)&element->rotation, 0.1f);
+            //change rotation in degrees
+            ImGui::DragFloat3(("rotation of " + (*it)->getName()).c_str(), (float*)&(*it)->rotation, 1.0f);
+            
+            if (ImGui::Button(("delete " + (*it)->getName()).c_str())) {
+                (*it)->cleanup();
+                delete (*it);
+                it = Element::elementList.erase(it);
+            }
 
             ImGui::NewLine();
         }
@@ -68,6 +75,39 @@ void UI::draw(MTLEngine* mtlEngine, MTL::RenderCommandEncoder* renderCommandEnco
         ImGui::NewLine();
         
         ImGui::Text("Application frame (%.1f FPS)", io->Framerate);
+        
+        ImGui::Checkbox("Demo Window", &show_demo_window);
+        
+        ImGui::End();
+    }
+    
+    {//camera
+        ImGui::Begin("Camera setting :", NULL, ImGuiWindowFlags_AlwaysAutoResize);
+        
+        if (ImGui::Button("Change view")) {
+            mtlEngine->sceneCamera->changeView();
+        }
+        
+        ImGui::NewLine();
+        
+        if (mtlEngine->sceneCamera->getViewType() == View::Perspective) {
+            ImGui::Text("Perspective view parameters :");
+            ImGui::DragFloat("FOV", &mtlEngine->sceneCamera->fov, 0.1f, 0.0f, 360.0f);
+        }
+        else {
+            ImGui::Text("Orthogonal view parameters :");
+        }
+        ImGui::DragFloat("nearZ", &mtlEngine->sceneCamera->nearZ, 0.01f, 0.0f, mtlEngine->sceneCamera->farZ);
+        ImGui::DragFloat("farZ", &mtlEngine->sceneCamera->farZ, 0.1f, 0.0f, FLT_MAX);
+        
+        ImGui::NewLine();
+        
+        ImGui::Text("Global camera parameters :");
+        ImGui::DragFloat3("Camera position", (float*)&mtlEngine->sceneCamera->cameraPosition, 0.1f);
+        ImGui::DragFloat3("Camera right vector", (float*)&mtlEngine->sceneCamera->rightVector, 0.1f);
+        ImGui::DragFloat3("Camera up vector", (float*)&mtlEngine->sceneCamera->upVector, 0.1f);
+        ImGui::DragFloat3("Camera forward vector", (float*)&mtlEngine->sceneCamera->forwardVector, 0.1f);
+        
         ImGui::End();
     }
 

@@ -6,8 +6,12 @@
 //
 #include "Camera.hpp"
 
-void Camera::ChangeView() {
+void Camera::changeView() {
     viewType = (View)(((int)viewType + 1) % 2);
+}
+
+View Camera::getViewType() {
+    return viewType;
 }
 
 void Camera::setPosition(simd::float3 newPosition) {
@@ -33,7 +37,7 @@ matrix_float4x4 Camera::getViewMatrix() {
 matrix_float4x4 Camera::getPerspectiveMatrix(float aspectRatio) {
     switch (viewType) {
         case View::Perspective:
-            return matrix_perspective_right_hand(fov, aspectRatio, nearZ, farZ);
+            return matrix_perspective_right_hand(fov  * (M_PI / 180.0f), aspectRatio, nearZ, farZ);
             break;
             
         case View::Orthogonal:

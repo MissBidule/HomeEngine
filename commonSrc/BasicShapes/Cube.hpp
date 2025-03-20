@@ -16,6 +16,4 @@ public:
     
 private:
     void createVertexUV(MTL::Device* metalDevice) override;
-    
-    friend class UI;
 };

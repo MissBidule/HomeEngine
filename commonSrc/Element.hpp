@@ -49,7 +49,7 @@ protected:
     simd::float4 color = simd::float4 {1,1,1,1};
     simd::float3 position = simd::float3 {0,0,-4};
     simd::float3 scale = simd::float3 {1,1,1};
-    simd::float3 rotation = simd::float3 {0,0,0};
+    simd::float3 rotation = simd::float3 {0,0,0}; //in degrees
     matrix_float4x4 modelMatrix;
     MTL::PrimitiveType primitiveType = MTL::PrimitiveTypeTriangle;
     MTL::TriangleFillMode fillMode = MTL::TriangleFillModeFill;

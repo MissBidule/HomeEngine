@@ -90,9 +90,9 @@ simd::float3 Element::getRotation() {
 matrix_float4x4 Element::getModelMatrix() {
     matrix_float4x4 translationMatrix = matrix4x4_translation(getPosition());
     matrix_float4x4 scaleMatrix = matrix4x4_scale(getScale());
-    matrix_float4x4 XrotationMatrix = matrix4x4_rotation(rotation.x, 1, 0, 0);
-    matrix_float4x4 YrotationMatrix = matrix4x4_rotation(rotation.y, 0, 1, 0);
-    matrix_float4x4 ZrotationMatrix = matrix4x4_rotation(rotation.z, 0, 0, 1);
+    matrix_float4x4 XrotationMatrix = matrix4x4_rotation(rotation.x * M_PI / 180.0f, 1, 0, 0);
+    matrix_float4x4 YrotationMatrix = matrix4x4_rotation(rotation.y * M_PI / 180.0f, 0, 1, 0);
+    matrix_float4x4 ZrotationMatrix = matrix4x4_rotation(rotation.z * M_PI / 180.0f, 0, 0, 1);
     
     matrix_float4x4 rotationMatrix = simd_mul(XrotationMatrix, simd_mul(YrotationMatrix, ZrotationMatrix));
     
