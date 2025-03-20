@@ -24,6 +24,8 @@
 
 #include "AAPLMathUtilities.h"
 
+class UI;
+
 class MTLEngine {
 public:
     void init();
@@ -75,4 +77,7 @@ private:
     //flat color shader
     ShaderParam* textureShader;
     //light shader
+    
+    UI* UserInterface;
+    friend class UI;
 };

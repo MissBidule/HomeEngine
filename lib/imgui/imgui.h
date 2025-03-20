@@ -31,6 +31,7 @@
 #define IMGUI_VERSION       "1.91.9 WIP"
 #define IMGUI_VERSION_NUM   19184
 #define IMGUI_HAS_TABLE
+#define IMGUI_IMPL_METAL_CPP
 
 /*
 

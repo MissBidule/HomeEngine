@@ -4,10 +4,14 @@
 //
 //  Created by MissBidule on 19/02/2025.
 //
+#include "UI.hpp"
 #include "GLFWBridge.h"
 #include "mtl_engine.hpp"
 #include "Cube.hpp"
 #include <iostream>
+
+const int DEF_WIDTH = 2560;
+const int DEF_HEIGHT = 1440;
 
 void MTLEngine::init() {
     initDevice();
@@ -15,14 +19,9 @@ void MTLEngine::init() {
     
     createDefaultLibrary();
     createBasicShaders();
+    UserInterface = new UI(glfwWindow, metalDevice);
     sceneCamera = new Camera();
     sceneCamera->setPosition(simd::float3 {0, 0.5f, 1});
-    Cube* cube1 = new Cube(textureShader, metalDevice);
-    Cube* cube2 = new Cube(textureShader, metalDevice);
-    cube1->applytexture("assets/pretty.png", metalDevice);
-    cube2->applytexture("assets/pretty.png", metalDevice);
-    cube1->setPosition(simd::float3 {-1, 0, -1});
-    cube2->setPosition(simd::float3 {1, 0, -1});
     
     createCommandQueue();
     createRenderPipeline();
@@ -45,6 +44,8 @@ void MTLEngine::cleanup() {
         element->cleanup();
         delete element;
     }
+    UserInterface->cleanup();
+    delete UserInterface;
     
     glfwTerminate();
     msaaRenderTargetTexture->release();
@@ -87,7 +88,7 @@ float MTLEngine::getAspectRatio() {
 void MTLEngine::initWindow() {
     glfwInit();
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-    glfwWindow = glfwCreateWindow(800, 600, "HomeEngine", NULL, NULL);
+    glfwWindow = glfwCreateWindow(DEF_WIDTH, DEF_HEIGHT, "HomeEngine", NULL, NULL);
     if (!glfwWindow) {
         glfwTerminate();
         exit(EXIT_FAILURE);
@@ -201,8 +202,9 @@ void MTLEngine::encodeRenderCommand(MTL::RenderCommandEncoder* renderCommandEnco
     renderCommandEncoder->setFrontFacingWinding(MTL::WindingCounterClockwise);
     renderCommandEncoder->setCullMode(MTL::CullModeBack);
     renderCommandEncoder->setDepthStencilState(depthStencilState);
-    
+
     for (Element* element : Element::elementList) {
         element->draw(renderCommandEncoder, sceneCamera, getAspectRatio());
     }
+    UserInterface->draw(this, renderCommandEncoder);
 }

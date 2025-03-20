@@ -8,6 +8,10 @@
 
 std::list<Element*> Element::elementList = std::list<Element*>();
 
+bool Element::cmp(const Element* a, const Element* b) {
+    return a->position.z < b->position.z;
+}
+
 Element::Element(ShaderParam* shaderParam) : shader(shaderParam){
     elementList.emplace_back(this);
 }
@@ -47,6 +51,10 @@ void Element::changeShader(ShaderParam& newShader) {
     shader = &newShader;
 }
 
+std::string Element::getName() {
+    return name + std::to_string(id);
+}
+
 void Element::setColor(simd::float4 newColor) {
     color = newColor;
 }
@@ -63,8 +71,33 @@ simd::float3 Element::getPosition() {
     return position;
 }
 
+void Element::setScale(simd::float3 newScale) {
+    scale = newScale;
+}
+
+simd::float3 Element::getScale() {
+    return scale;
+}
+
+void Element::setRotation(simd::float3 newRotation) {
+    rotation = newRotation;
+}
+
+simd::float3 Element::getRotation() {
+    return rotation;
+}
+
 matrix_float4x4 Element::getModelMatrix() {
-    return matrix4x4_translation(getPosition());
+    matrix_float4x4 translationMatrix = matrix4x4_translation(getPosition());
+    matrix_float4x4 scaleMatrix = matrix4x4_scale(getScale());
+    matrix_float4x4 XrotationMatrix = matrix4x4_rotation(rotation.x, 1, 0, 0);
+    matrix_float4x4 YrotationMatrix = matrix4x4_rotation(rotation.y, 0, 1, 0);
+    matrix_float4x4 ZrotationMatrix = matrix4x4_rotation(rotation.z, 0, 0, 1);
+    
+    matrix_float4x4 rotationMatrix = simd_mul(XrotationMatrix, simd_mul(YrotationMatrix, ZrotationMatrix));
+    
+    //T*R*S
+    return simd_mul(translationMatrix, simd_mul(rotationMatrix, scaleMatrix));
     
     //FOR ME ONLY TEMPORARY
     /*//Moves the cube 2 units down the negative Z-axis
